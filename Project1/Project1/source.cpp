@@ -1,49 +1,32 @@
-#include <iostream>
-#include<stack>
-#include<string>
+#define _CRT_SECURE_NO_WARNINGS
+#include <cstdio>
+#include<queue>
 using namespace std;
 
 int main() {
-	ios_base::sync_with_stdio;
-	cin.tie(nullptr);
-	int n;
-	int current = 1;
-	string record;
-	cin >> n;
-	stack<int> numbers;
-	bool found;
-	while (n--) {
-		int num;
-		cin >> num;
-		if (current <= num) {
-			while (current <= num) {
-				numbers.push(current);
-				record += '+';
-				current += 1;
+	int n, m;
+	scanf("%d %d", &n, &m);
+	queue<int> q;
+	for (int i = 0; i < n; i++) {
+		q.push(i + 1);
+	}
+	int j = 0;
+	printf("<");
+	while (!q.empty()) {
+		if ((j + 1) % m == 0) {
+			if (q.size() == 1) {
+				printf("%d", q.front());
 			}
-			numbers.pop();
-			record += '-';
+			else {
+				printf("%d, ", q.front());
+			}
 		}
 		else {
-			found = false;
-			if (!numbers.empty()) {
-				int top = numbers.top();
-				numbers.pop();
-				record += '-';
-				if (top == num) {
-					found = true;
-				}
-			}
-			if (!found) {
-				cout << "NO" << '\n';
-				return 0;
-			}
+			q.push(q.front());
 		}
+		q.pop();
+		j += 1;
 	}
-	if (found) {
-		for (int i = 0; i < record.size(); i++) {
-			cout << record[i] << '\n';
-		}
-	}
+	printf(">");
 	return 0;
 }
