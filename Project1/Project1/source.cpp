@@ -1,32 +1,28 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <cstdio>
-#include<queue>
+#include <iostream>
+#include<stack>
+#include<string>
+#include<vector>
 using namespace std;
 
 int main() {
-	int n, m;
-	scanf("%d %d", &n, &m);
-	queue<int> q;
-	for (int i = 0; i < n; i++) {
-		q.push(i + 1);
+	int num;
+	cin >> num;
+	stack<int> s;
+	vector<int> question(num);
+	vector<int> answer(num);	//c++의 vector 자료형
+	for (int i = 0; i < num; i++) {
+		cin >> question[i];
 	}
-	int j = 0;
-	printf("<");
-	while (!q.empty()) {
-		if ((j + 1) % m == 0) {
-			if (q.size() == 1) {
-				printf("%d", q.front());
-			}
-			else {
-				printf("%d, ", q.front());
-			}
+	for (int i = 0; i < num; i++) {
+		while (!s.empty() && question[s.top()] < question[i]) {
+			answer[s.top()] = question[i];
+			s.pop();
 		}
-		else {
-			q.push(q.front());
-		}
-		q.pop();
-		j += 1;
+		s.push(i);
 	}
-	printf(">");
+	for (int i = 0; i < num; i++) {
+		cout << (answer[i] == 0 ? -1 : answer[i]) << ' ';
+	}
 	return 0;
 }
