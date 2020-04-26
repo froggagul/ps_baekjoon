@@ -1,28 +1,32 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+#include <string>
 #include<stack>
-#include<string>
-#include<vector>
 using namespace std;
 
-int main() {
-	int num;
-	cin >> num;
-	stack<int> s;
-	vector<int> question(num);
-	vector<int> answer(num);	//c++의 vector 자료형
-	for (int i = 0; i < num; i++) {
-		cin >> question[i];
-	}
-	for (int i = 0; i < num; i++) {
-		while (!s.empty() && question[s.top()] < question[i]) {
-			answer[s.top()] = question[i];
-			s.pop();
-		}
-		s.push(i);
-	}
-	for (int i = 0; i < num; i++) {
-		cout << (answer[i] == 0 ? -1 : answer[i]) << ' ';
-	}
-	return 0;
+int main()
+{
+    string str;
+    while (getline(cin, str)) {
+        int lowCase = 0;
+        int upperCase = 0;
+        int number = 0;
+        int space = 0;
+        for (char ch : str) {
+            if (ch >= 'A' && ch <= 'Z') {
+                upperCase += 1;
+            }
+            else if (ch >= 'a' && ch <= 'z') {
+                lowCase += 1;
+            }
+            else if (ch >= '0' && ch <= '9') {
+                number += 1;
+            }
+            else if (ch == ' ') {
+                space += 1;
+            }
+        }
+        cout << lowCase << " " << upperCase << " " << number << " " << space << " " << '\n';
+    }
+    return 0;
 }
