@@ -1,32 +1,43 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-#include <string>
-#include<stack>
+#include <cstring>
 using namespace std;
+
+int d[100001][4] = { 0 };
+
+int go(int exc, int n) {
+    if (d[n][exc] > -1) return d[n][exc];
+    for (int i = 1; i <= 3; i++) {
+        if (i != exc && n - i >= 0) {
+            d[n][exc] = (d[n][exc] + go(i, n - i)) % 1000000009;
+        }
+    }
+    return d[n][exc];
+}
 
 int main()
 {
-    string str;
-    while (getline(cin, str)) {
-        int lowCase = 0;
-        int upperCase = 0;
-        int number = 0;
-        int space = 0;
-        for (char ch : str) {
-            if (ch >= 'A' && ch <= 'Z') {
-                upperCase += 1;
-            }
-            else if (ch >= 'a' && ch <= 'z') {
-                lowCase += 1;
-            }
-            else if (ch >= '0' && ch <= '9') {
-                number += 1;
-            }
-            else if (ch == ' ') {
-                space += 1;
-            }
+    for (int i = 0; i < 100001; i++) {
+        for (int j = 0; j < 4; j++) {
+            d[i][j] = -1;//미정
         }
-        cout << lowCase << " " << upperCase << " " << number << " " << space << " " << '\n';
+    }
+    d[0][1] = 1;
+    d[1][1] = 0;
+    int num;
+    cin >> num;
+    for (int i = 1; i <= num; i++) {
+        int curr;
+        cin >> curr;
+        int result = go(0, curr);
+        if (result == 0) {
+            result = 1000000008;
+        }
+        else {
+            result -= 1;
+        }
+        // 하나밖에 없는 경우
+        cout << result << '\n';
     }
     return 0;
 }
