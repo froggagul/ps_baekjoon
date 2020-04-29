@@ -1,43 +1,33 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <iostream>
-#include <cstring>
+#include<iostream>
 using namespace std;
+int q[1000] = { 0 };
+int d[1000] = { 0 };
 
-int d[100001][4] = { 0 };
-
-int go(int exc, int n) {
-    if (d[n][exc] > -1) return d[n][exc];
-    for (int i = 1; i <= 3; i++) {
-        if (i != exc && n - i >= 0) {
-            d[n][exc] = (d[n][exc] + go(i, n - i)) % 1000000009;
-        }
-    }
-    return d[n][exc];
-}
-
-int main()
-{
-    for (int i = 0; i < 100001; i++) {
-        for (int j = 0; j < 4; j++) {
-            d[i][j] = -1;//미정
-        }
-    }
-    d[0][1] = 1;
-    d[1][1] = 0;
-    int num;
-    cin >> num;
-    for (int i = 1; i <= num; i++) {
-        int curr;
-        cin >> curr;
-        int result = go(0, curr);
-        if (result == 0) {
-            result = 1000000008;
-        }
-        else {
-            result -= 1;
-        }
-        // 하나밖에 없는 경우
-        cout << result << '\n';
-    }
-    return 0;
+int main() {
+	int num;
+	cin >> num;
+	num;
+	for (int i = 0; i < num; i++) {
+		int curr;
+		cin >> curr;
+		q[i] = curr;
+	}
+	for (int i = num - 1; i >= 0; i--) {
+		d[i] = 1;
+		for (int j = i; j < num; j++) {
+			if (q[i] < q[j] && d[i] < (d[j] + 1)) {
+				d[i] = d[j] + 1;
+			}
+		}
+	}
+	int max = 0;
+	for (int i = 0; i < num; i++) {
+		int temp = d[i];
+		if (temp > max) {
+			max = temp;
+		}
+	}
+	cout << max << '\n';
+	return 0;
 }
