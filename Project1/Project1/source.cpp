@@ -1,38 +1,39 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
-#include<vector>
 #include<algorithm>
 using namespace std;
 
-int main() {
-	int num;
-	cin >> num;
-	while (num -- ) {
-		int m, n, x, y;
-		cin >> m;
-		cin >> n;
-		cin >> x;
-		cin >> y;
-		x -= 1;
-		y -= 1;
+int numbers[10];
+int answer[10];
+bool checks[10];
 
-		int tempx = 0;
-		int tempy = 0;
-		int answer = -1;
-		for (int i = x; i < m * n; i += m) {
-			tempx = i % m;
-			tempy = i % n;
-			if (tempx == x && tempy == y) {
-				answer = i + 1;
-				break;
-			}
+void go(int index, int n, int m) {
+	if (index == m + 1) {
+		for (int i = 1; i <= m; i++) {
+			cout << answer[i] << " ";
 		}
-		if (answer != -1) {
-			cout << answer << '\n';
-		}
-		else {
-			cout << -1 << '\n';
-		}
+		cout << '\n';
+		return;
 	}
+	for (int i = 1; i <= n; i++) {
+		if (numbers[i] == numbers[i - 1] && checks[i - 1] == false) continue;
+		if (checks[i]) continue;
+		checks[i] = true;
+		answer[index] = numbers[i];
+		go(index + 1, n, m);
+		checks[i] = false;
+	}
+}
+
+int main() {
+	int n;
+	int m;
+	cin >> n;
+	cin >> m;
+	for (int i = 1; i <= n; i++) {
+		cin >> numbers[i];
+	}
+	sort(numbers + 1, numbers + n + 1);
+	go(1, n, m);
 	return 0;
 }
