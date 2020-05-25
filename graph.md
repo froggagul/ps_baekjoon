@@ -118,3 +118,47 @@ BFS
 ====
 * 그래프를 각 vertex간 edge가 존재하지 않는 두개의 집합으로 나눌 수 있으면 이분그래프라고 한다.
 * 그래프를 DFS 또는 BFS 탐색으로 이분 그래프인지 아닌지 알아낼 수 있다.
+
+트리
+====
+* 사이클이 없는! 연결 그래프이다.
+* Node의 개수가 V일때, edge의 개수는 v-1이다.
+    * 단, 역은 성립하지 않고, 모든 node가 연결되어있다는 조건이 필요하다.
+* root의 유무에 따라
+    * root가 있는 트리
+        * root로부터 아래로 방향을 정할 수 있다.
+            * 연결되어 있을때, root에 가까운 node가 parent, 먼 쪽을 children이라 한다.
+                * 멀리 떨어져 있되, root - p - q로 연결되어있으면, p는 조상 q는 자손 
+            * 같은 부모를 지니면 sibling이다.
+            * 자손이 없는 node를 leaf node라 한다.
+            * depth : root에서부터의 거리 (root는 0)
+            * height : depth 중 가장 큰 값
+    * root가 없는 트리
+
+이진 트리(binary tree)
+====
+* 자식을 최대 두개 가지고 있는 트리
+* 이때, leaf node 제외 모두의 자손이 2이면 이를 완전 이진 트리(complete binary tree)
+    * 이때, 모든 leaf node의 depth가 같으면, 이를 포화 이진 트리(perfect binary tree)라 한다. (node의 수가 height n에서, 2^n - 1이다.)
+
+트리의 표현
+====
+* 그래프의 일종이기 때문에, 그래프의 표현 방식을 사용함.
+* 혹은 부모를 하나만 지니기 때문에, 부모를 저장하는 방식으로도 표현 가능
+    * root의 경우 부모가 없기 때문에 -1/0을 저장하기도 한다.
+* 완전 이진 트리
+    * 배열로 나타낼 수 있다.
+        * 부모의 index가 x이면, 자손의 index는 각각 x * 2 , x * 2 + 1이다.
+    * 구조체나 클래스를 사용할 수도 있다.
+
+트리의 순회
+====
+* 그래프의 일종이기 때문에, DFS / BFS를 사용하기도 한다
+* DFS는 preorder / inorder / postorder에 따라 출력순서가 달라진다.
+    * 세 방법은 node의 방문 처리를 하는 방법에 따라 다르다.
+    * preorder
+        * 부모, 왼쪽 subtree, 오른쪽 subtree순으로 출력
+    * inorder
+        * 왼쪽 subtree, 부모, 오른쪽 subtree
+    * postorder
+        * 왼쪽 subtree, 오른쪽 subtree, 부모
