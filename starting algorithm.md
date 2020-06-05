@@ -76,7 +76,7 @@ C++
   * cout을 사용하는 경우 \n을 쓰는 것이 endl보다 훨씬 빠르다.
   * 다음 코드와 함께라면 더 빠르다!
   ```c++
-  ios_base::sync_with_studio(false);
+  ios_base::sync_with_stdio(false);
   cin.tie(NULL);
   cout.tie(NULL);
   ```
