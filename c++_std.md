@@ -1,6 +1,5 @@
 vector
 ====
-
 vector
 ----
 * 자동으로 메모리가 할당되는 배열
@@ -36,3 +35,41 @@ pair
 * 두 자료형을 묶을 수 있다.
 * 첫번째 자료형에 접근하기 위해 first, 두번째 자료형에는 second로 접근 가능.
 * nested pair 가능
+
+limits
+====
+* 구문
+    ```c++
+    std::numeric_limits<T>::min()
+    // T type이 가질 수 있는 최소한의 값.
+    ```
+
+string
+====
+substr
+----
+
+[reference](https://en.cppreference.com/w/cpp/string/basic_string/substr)
+
+algorithm
+====
+next_permutation/prev_permutation
+```c++
+#include <iostream>     // std::cout
+#include <algorithm>    // std::next_permutation, std::sort
+
+int main () {
+  int myints[] = {1,2,3};
+
+  std::sort (myints,myints+3);
+
+  std::cout << "The 3! possible permutations with 3 elements:\n";
+  do {
+    std::cout << myints[0] << ' ' << myints[1] << ' ' << myints[2] << '\n';
+  } while ( std::next_permutation(myints,myints+3) );
+
+  std::cout << "After loop: " << myints[0] << ' ' << myints[1] << ' ' << myints[2] << '\n';
+
+  return 0;
+}
+```

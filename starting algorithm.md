@@ -82,9 +82,8 @@ C++
   ```
 C
 * scanf,printf
+* scanf의 리턴값은 성공적으로 입력받은 변수의 개수이다.
 
 Java
 * 입력은 scanner, 출력은 System.out
 * 입력이 많은 경우 속도가 느리기 때문에 bufferedreader를 사용
-
-* scanf의 리턴값은 성공적으로 입력받은 변수의 개수이다.
