@@ -1,3 +1,4 @@
+1. struct version
 ```c++
 struct DisjointSet {
 	vector<int> parent, rank;
@@ -25,3 +26,22 @@ public://공개 멤버, 외부에서도 확인 가능
 	} 
 };
 ```
+
+2. 전역변수 version
+```c++
+int parent[1502 * 1502];
+
+int Find(int x) {
+    if (parent[x] == x) return x;
+    return parent[x] = Find(parent[x]);
+}
+
+void Merge(int x, int y) {
+    x = Find(x);
+    y = Find(y);
+
+    if (x == y) return; //이미 같은 루트 노드 보유 중 Merge 필요 없음
+    parent[x] = y;// merge 완료
+}
+```
+
